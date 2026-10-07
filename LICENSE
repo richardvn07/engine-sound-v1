@@ -1,21 +1,137 @@
-MIT License
+ENGINE SOUND MVP — BẢN QUYỀN VÀ GIẤY PHÉP SỬ DỤNG
+Bản quyền © 2026 BILL. Bảo lưu mọi quyền.
+(English version below / Bản tiếng Anh ở phía dưới)
 
-Copyright (c) 2026 richardvn07
+================================================================
+TIẾNG VIỆT
+================================================================
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+1. CHỦ SỞ HỮU
+Toàn bộ mã nguồn, thiết kế, văn bản và tài liệu đi kèm ("Phần mềm") thuộc
+bản quyền của BILL ("Chủ sở hữu"). Phần mềm được cấp phép, không bán.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+2. QUYỀN ĐƯỢC CẤP (MIỄN PHÍ, PHI THƯƠNG MẠI)
+Chủ sở hữu cấp cho bạn giấy phép không độc quyền, không thể chuyển nhượng,
+không thể cấp lại, miễn phí, để:
+  (a) sử dụng Phần mềm cho mục đích cá nhân, học tập, nghiên cứu hoặc đánh
+      giá phi thương mại;
+  (b) sao chép và chỉnh sửa Phần mềm cho các mục đích phi thương mại nêu
+      trên;
+  (c) chia sẻ Phần mềm nguyên vẹn, kèm giấy phép này, cho người khác miễn phí.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. ĐIỀU KIỆN
+  (a) Giữ nguyên thông báo bản quyền và giấy phép này trong mọi bản sao.
+  (b) Khi chia sẻ hoặc công bố bản chỉnh sửa, ghi rõ nguồn
+      "Engine Sound MVP — BILL" và nêu rằng bản đó đã được chỉnh sửa.
+  (c) Bản chỉnh sửa cũng chịu giấy phép này.
+
+4. SỬ DỤNG THƯƠNG MẠI CẦN CÓ SỰ CHO PHÉP BẰNG VĂN BẢN
+"Sử dụng thương mại" gồm nhưng không giới hạn ở:
+  - bán, cho thuê, thu phí hoặc thu phí đăng ký liên quan đến Phần mềm;
+  - tích hợp Phần mềm vào sản phẩm hoặc dịch vụ có thu phí hoặc tạo doanh
+    thu (kể cả qua quảng cáo, tài trợ hoặc bán dữ liệu);
+  - đăng Phần mềm hoặc bản phái sinh lên cửa hàng ứng dụng để bán hoặc thu phí;
+  - dùng trong hoạt động kinh doanh của doanh nghiệp hoặc tổ chức để tạo
+    doanh thu hoặc phục vụ khách hàng, bao gồm nhúng vào website thương mại;
+  - cung cấp dưới dạng dịch vụ (SaaS) hoặc làm sản phẩm bàn giao cho khách hàng.
+Nếu bạn muốn sử dụng thương mại, VUI LÒNG LIÊN HỆ CHỦ SỞ HỮU TRƯỚC và chỉ
+được thực hiện sau khi nhận được sự đồng ý bằng văn bản (có thể kèm điều
+kiện hoặc phí cấp phép). Khi chưa có sự đồng ý đó, mọi sử dụng thương mại
+đều không được phép.
+
+5. HẠN CHẾ
+Bạn không được: (a) xóa hoặc làm sai lệch thông báo bản quyền; (b) tuyên bố
+mình là tác giả hoặc chủ sở hữu của Phần mềm; (c) cấp lại giấy phép hoặc
+chuyển nhượng quyền theo giấy phép này; (d) dùng tên "BILL" để ngụ ý được
+bảo trợ hoặc xác nhận mà không có sự đồng ý.
+
+6. NHÃN HIỆU CỦA BÊN THỨ BA
+Tên hãng xe và nhãn hiệu (ví dụ Porsche, BMW, Volkswagen, Mercedes-AMG)
+thuộc về chủ sở hữu tương ứng, chỉ được dùng để mô tả phong cách âm thanh.
+Phần mềm không liên kết, không được tài trợ hay xác nhận bởi các hãng này.
+
+7. KHÔNG BẢO ĐẢM
+Trong phạm vi pháp luật cho phép, Phần mềm được cung cấp "NGUYÊN TRẠNG",
+không có bảo đảm nào, rõ ràng hay ngụ ý, gồm bảo đảm về khả năng thương
+mại, sự phù hợp cho một mục đích cụ thể hoặc không vi phạm quyền của người khác.
+Phần mềm không phải thiết bị y tế và không bảo đảm giảm say xe.
+
+8. GIỚI HẠN TRÁCH NHIỆM
+Trong phạm vi pháp luật cho phép, Chủ sở hữu không chịu trách nhiệm về bất
+kỳ thiệt hại trực tiếp, gián tiếp, ngẫu nhiên hay hệ quả nào phát sinh từ
+việc sử dụng hoặc không thể sử dụng Phần mềm, bao gồm cả thiệt hại do sử
+dụng Phần mềm khi đang lái xe. Bạn tự chịu trách nhiệm tuân thủ pháp luật
+giao thông.
+
+9. CHẤM DỨT
+Giấy phép này tự động chấm dứt nếu bạn vi phạm bất kỳ điều khoản nào. Khi
+đó bạn phải ngừng sử dụng và xóa các bản sao Phần mềm.
+
+10. LIÊN HỆ (CẤP PHÉP THƯƠNG MẠI VÀ CÁC YÊU CẦU KHÁC)
+BILL — [ĐIỀN EMAIL / THÔNG TIN LIÊN HỆ]
+
+Xem thêm: TERMS.md (Điều khoản sử dụng) và PRIVACY.md (Chính sách quyền riêng tư).
+
+================================================================
+ENGLISH
+================================================================
+
+Copyright (c) 2026 BILL. All rights reserved.
+
+1. OWNERSHIP. All source code, designs, text and accompanying materials (the
+"Software") are copyrighted by BILL (the "Owner"). The Software is licensed,
+not sold.
+
+2. GRANT (FREE, NON-COMMERCIAL). The Owner grants you a non-exclusive,
+non-transferable, non-sublicensable, royalty-free license to: (a) use the
+Software for personal, educational, research or non-commercial evaluation
+purposes; (b) copy and modify it for those purposes; and (c) share the
+unmodified Software, together with this license, with others free of charge.
+
+3. CONDITIONS. (a) Keep the copyright notice and this license in all copies.
+(b) When sharing or publishing a modified version, credit "Engine Sound MVP —
+BILL" and state that it has been modified. (c) Modified versions are subject
+to this license.
+
+4. COMMERCIAL USE REQUIRES WRITTEN PERMISSION. "Commercial use" includes, but
+is not limited to: selling, renting or charging fees or subscriptions related
+to the Software; integrating it into any paid product or service or one that
+generates revenue (including through advertising, sponsorship or data sales);
+publishing it or derivatives in an app store for sale or for a fee; using it
+in the operations of a business or organization to generate revenue or serve
+customers, including embedding it in a commercial website; and offering it as
+a service (SaaS) or as a client deliverable. If you wish to use the Software
+commercially, PLEASE CONTACT THE OWNER FIRST and proceed only after receiving
+written consent (which may include conditions or a license fee). Without such
+consent, all commercial use is prohibited.
+
+5. RESTRICTIONS. You may not: (a) remove or alter copyright notices; (b) claim
+to be the author or owner of the Software; (c) sublicense or assign rights
+under this license; or (d) use the name "BILL" to imply endorsement without
+consent.
+
+6. THIRD-PARTY TRADEMARKS. Car brand names and trademarks (e.g., Porsche, BMW,
+Volkswagen, Mercedes-AMG) belong to their respective owners and are used only
+to describe a style of sound. The Software is not affiliated with, sponsored
+by or endorsed by these companies.
+
+7. NO WARRANTY. To the maximum extent permitted by law, the Software is
+provided "AS IS" without warranty of any kind, express or implied, including
+merchantability, fitness for a particular purpose and non-infringement. The
+Software is not a medical device and does not guarantee relief from motion
+sickness.
+
+8. LIMITATION OF LIABILITY. To the maximum extent permitted by law, the Owner
+is not liable for any direct, indirect, incidental or consequential damages
+arising from the use of or inability to use the Software, including damages
+resulting from use while driving. You are responsible for complying with
+traffic laws.
+
+9. TERMINATION. This license terminates automatically if you breach any of its
+terms. You must then stop using and delete all copies of the Software.
+
+10. CONTACT (COMMERCIAL LICENSING AND OTHER REQUESTS).
+BILL — [INSERT EMAIL / CONTACT DETAILS]
+
+Language: if the Vietnamese and English versions differ, the Vietnamese
+version prevails.
