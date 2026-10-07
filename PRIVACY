@@ -1,0 +1,36 @@
+# Chính sách quyền riêng tư — Engine Sound MVP
+
+**Cập nhật lần cuối:** 07/10/2026
+**Chủ sở hữu / người kiểm soát:** BILL — liên hệ: [ĐIỀN EMAIL]
+
+Chính sách này giải thích Engine Sound MVP ("Ứng dụng") xử lý thông tin như thế nào. Tóm tắt: **Ứng dụng không thu thập, không lưu trữ và không gửi dữ liệu vị trí của bạn lên máy chủ nào.**
+
+## 1. Dữ liệu Ứng dụng sử dụng
+
+| Dữ liệu | Mục đích | Được xử lý ở đâu | Có gửi đi / lưu trữ không? |
+|---|---|---|---|
+| **Vị trí và tốc độ (GPS)** | Tính gia tốc để tạo tiếng động cơ | Ngay trên thiết bị của bạn (trong trình duyệt) | **Không.** Chỉ dùng tức thời trong bộ nhớ, mất khi đóng trang |
+| **Cài đặt chế độ âm thanh** | Nhớ chế độ bạn đã chọn | Bộ nhớ cục bộ của trình duyệt (`localStorage`) | Chỉ nằm trên thiết bị của bạn; bạn có thể xóa bất cứ lúc nào |
+
+Ứng dụng **không** yêu cầu tài khoản, **không** thu thập họ tên, email, số điện thoại, danh bạ, ảnh hay micro, **không** dùng quảng cáo và **không** tích hợp công cụ phân tích hay theo dõi do Ứng dụng tự cài.
+
+## 2. Quyền vị trí
+Ứng dụng chỉ yêu cầu quyền vị trí khi bạn bấm **Dùng GPS**. Bạn có thể từ chối hoặc thu hồi quyền bất cứ lúc nào trong cài đặt thiết bị (trên iPhone: *Cài đặt > Quyền riêng tư & Bảo mật > Dịch vụ định vị > Safari*). Nếu không cấp quyền, bạn vẫn dùng được chế độ **Mô phỏng** mà không cần vị trí.
+
+## 3. Bên thứ ba (nơi lưu trữ và nhúng trang)
+Dù Ứng dụng không gửi dữ liệu vị trí đi, trang web được tải từ một dịch vụ lưu trữ (ví dụ GitHub Pages, Netlify, Cloudflare hoặc Wix nếu được nhúng vào website). Các dịch vụ này có thể ghi nhật ký kỹ thuật thông thường như **địa chỉ IP, loại trình duyệt, thời gian truy cập**, và có thể đặt cookie theo chính sách riêng của họ. BILL không kiểm soát việc đó. Bạn nên xem chính sách quyền riêng tư của dịch vụ tương ứng. Nếu Ứng dụng được nhúng vào một website khác, chính sách của website đó cũng áp dụng cho phần còn lại của trang.
+
+## 4. Lưu giữ và bảo mật
+Vì Ứng dụng không lưu dữ liệu cá nhân của bạn trên máy chủ, BILL không giữ dữ liệu vị trí để bảo vệ hay xóa. Ứng dụng chạy qua kết nối HTTPS. Dữ liệu cục bộ (cài đặt chế độ) có thể xóa bằng cách xóa dữ liệu trang web trong trình duyệt.
+
+## 5. Trẻ em
+Ứng dụng không nhắm tới trẻ em dưới **[13 / 16 — ĐIỀN THEO QUY ĐỊNH ÁP DỤNG]** tuổi và không chủ ý thu thập thông tin của trẻ em. Trẻ em nên dùng cùng người lớn, và chỉ hành khách (không phải người lái) mới được thao tác khi xe đang chạy.
+
+## 6. Quyền của bạn
+Bạn có thể từ chối quyền vị trí, ngừng sử dụng Ứng dụng và xóa dữ liệu trang web bất cứ lúc nào. Nếu bạn có câu hỏi về dữ liệu cá nhân, hãy liên hệ BILL. Vì Ứng dụng không lưu dữ liệu cá nhân của bạn, thường không có dữ liệu nào để truy xuất, chỉnh sửa hoặc xóa từ phía Ứng dụng.
+
+## 7. Thay đổi chính sách
+Nếu sau này Ứng dụng bổ sung tính năng có thu thập dữ liệu (ví dụ phân tích, tài khoản, lưu hành trình), chính sách này sẽ được cập nhật **trước khi** tính năng đó được bật, và ngày "Cập nhật lần cuối" sẽ thay đổi.
+
+## 8. Liên hệ
+**BILL**: [ĐIỀN EMAIL / THÔNG TIN LIÊN HỆ]
