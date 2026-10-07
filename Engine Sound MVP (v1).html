@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Engine Sound">
+<meta name="theme-color" content="#0e1013">
+<meta name="format-detection" content="telephone=no">
+<title>Engine Sound MVP</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--tx:#14161a;--mu:#6b7280;--ac:#e5471f;--ok:#16a34a;--bd:#e3e5ea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1013;--card:#181b21;--tx:#eef0f3;--mu:#8b93a1;--ac:#ff6a3d;--ok:#34d399;--bd:#272b33}}
+:root[data-theme="dark"]{--bg:#0e1013;--card:#181b21;--tx:#eef0f3;--mu:#8b93a1;--ac:#ff6a3d;--ok:#34d399;--bd:#272b33}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;overscroll-behavior:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+main{max-width:520px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0 2px}
+.sub{color:var(--mu);font-size:13px;margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+.badge{display:flex;align-items:center;gap:10px;font-weight:600;font-size:18px}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--mu)}
+.on .dot{background:var(--ac);box-shadow:0 0 12px var(--ac)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat small{color:var(--mu);font-size:12px;display:block}
+.stat b{font-size:28px;font-variant-numeric:tabular-nums}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden;margin-top:8px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ok),var(--ac))}
+button{-webkit-appearance:none;appearance:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;font:inherit;font-weight:600;border:0;border-radius:12px;padding:14px;background:var(--ac);color:#fff;width:100%;touch-action:manipulation}
+button.alt{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+.row{display:flex;gap:10px}
+.pedal{height:92px;font-size:17px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.pedal.down{filter:brightness(.8)}
+label{display:block;font-size:13px;color:var(--mu);margin-top:10px}
+input[type=range]{width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{width:auto;padding:9px 12px;font-size:14px;background:var(--card);color:var(--tx);border:1px solid var(--bd)}.chip.sel{background:var(--ac);color:#fff;border-color:var(--ac)}
+.sw{position:relative;display:grid;grid-template-columns:1fr 1fr;background:linear-gradient(180deg,rgba(0,0,0,.14),rgba(0,0,0,0) 65%),var(--bd);border-radius:999px;padding:4px;isolation:isolate;box-shadow:inset 0 3px 8px rgba(0,0,0,.30),inset 0 -1px 1px rgba(255,255,255,.35),0 1px 0 rgba(255,255,255,.35)}
+.sw .thumb{position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);border-radius:999px;background:linear-gradient(135deg,var(--ac),#ffa63d);z-index:0;
+  box-shadow:0 7px 14px rgba(229,71,31,.45),0 3px 0 rgba(140,36,8,.55),inset 0 2px 1px rgba(255,255,255,.6),inset 0 -4px 7px rgba(120,30,0,.35);
+  transition:transform .3s cubic-bezier(.3,1.25,.5,1),box-shadow .15s}
+.sw .thumb::before{content:"";position:absolute;left:7%;right:7%;top:3px;height:46%;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.65),rgba(255,255,255,.06))}
+.sw .thumb::after{content:"";position:absolute;left:14%;right:14%;bottom:2px;height:18%;border-radius:999px;background:linear-gradient(0deg,rgba(255,255,255,.28),rgba(255,255,255,0))}
+.sw[data-on="1"] .thumb{transform:translateX(100%)}
+.sw:active .thumb{transform:translateY(2px);box-shadow:0 3px 7px rgba(229,71,31,.4),0 1px 0 rgba(140,36,8,.55),inset 0 2px 1px rgba(255,255,255,.5),inset 0 -3px 6px rgba(120,30,0,.35)}
+.sw[data-on="1"]:active .thumb{transform:translateX(100%) translateY(2px)}
+.sw .opt{position:relative;z-index:1;width:auto;background:transparent;border:0;color:var(--mu);padding:12px 6px;border-radius:999px;font-size:14px;line-height:1.25;transition:color .2s,transform .12s}
+.sw .opt span{display:block;font-size:20px;line-height:1.1;margin-bottom:2px}
+.sw .opt{text-shadow:0 1px 0 rgba(255,255,255,.22)}
+.sw .opt.sel{color:#fff;text-shadow:0 1px 2px rgba(110,28,0,.55)}
+.sw .opt span{filter:drop-shadow(0 2px 2px rgba(0,0,0,.28))}
+.sw .opt:active{transform:scale(.96)}
+@media (prefers-reduced-motion:reduce){.sw .thumb,.sw .opt{transition:none}}
+.warn{display:flex;justify-content:center;gap:6px;align-items:center;white-space:nowrap;overflow:hidden;background:#facc15;color:#1a1300;border:2px solid #a16207;border-radius:12px;padding:8px 10px;margin-bottom:12px;font-weight:800;font-size:13px;line-height:1.3;letter-spacing:0;text-transform:uppercase;box-shadow:0 2px 0 rgba(0,0,0,.25)}
+.msg{font-size:13px;color:var(--mu)}
+.hide{display:none}
+</style>
+</head>
+<body>
+<main>
+  <div class="warn" id="warn" role="note"><span aria-hidden="true">⚠️</span><span id="warnT">CẢNH BÁO AN TOÀN: TÀI XẾ CHỈ THAO TÁC KHI XE ĐÃ DỪNG HẲN.</span></div>
+  <h1>🏎️ Engine Sound MVP</h1>
+  <p class="sub">GPS nhận biết chuyển động → phát âm thanh động cơ giả lập.</p>
+
+  <div class="card">
+    <div class="sw" id="seg" role="group" aria-label="Chế độ âm thanh" data-on="0">
+      <span class="thumb"></span>
+      <button type="button" class="opt" data-m="0"><span>🚀</span>GIẢ LẬP TĂNG TỐC</button>
+      <button type="button" class="opt" data-m="1"><span>🔊</span>GIẢ LẬP TOÀN PHẦN</button>
+    </div>
+    <p class="msg" id="modeDesc" style="margin:8px 0 0;white-space:pre-line"></p>
+  </div>
+
+  <div class="card"><div id="badge" class="badge"><span class="dot"></span><span id="state">Chưa bắt đầu</span></div></div>
+
+  <div class="card"><small class="msg">Loại động cơ (đổi được bất cứ lúc nào)</small><div id="chips" class="chips" style="margin-top:8px"></div><p class="msg" id="pdesc" style="margin:8px 0 0"></p></div>
+
+  <div class="card">
+    <div class="grid">
+      <div class="stat"><small>Tốc độ</small><b id="kmh">0</b> km/h</div>
+      <div class="stat"><small>Gia tốc</small><b id="acc">0.0</b> m/s²</div>
+      <div class="stat"><small>RPM</small><b id="rpm">0</b></div>
+      <div class="stat"><small>Số</small><b id="gear">-</b></div>
+    </div>
+    <div class="bar"><i id="rpmbar"></i></div>
+    <p class="msg" id="gpsInfo" style="margin:8px 0 0"></p>
+  </div>
+
+  <div id="start" class="card">
+    <div class="row">
+      <button id="bGps">📡 Dùng GPS</button>
+      <button id="bSim" class="alt">🎮 Mô phỏng</button>
+    </div>
+    <p class="msg" id="msg">Mở bằng Safari qua HTTPS, giữ màn hình sáng, tăng âm lượng. Bấm nút để Safari cho phép phát âm thanh và cấp quyền vị trí.</p>
+  </div>
+
+  <div id="simPanel" class="card hide">
+    <button id="tap" style="margin-bottom:10px;height:64px;font-size:17px">⚡ NHẤN ĐỂ TĂNG TỐC (1 lần = 3 giây)</button>
+    <div class="row">
+      <button id="pedal" class="pedal">GIỮ ĐỂ TĂNG TỐC</button>
+      <button id="brake" class="pedal alt">PHANH</button>
+    </div>
+    <p class="msg">Nhả ga → xe chạy ổn định → âm thanh tắt dần. Mô phỏng phát dữ liệu 1 lần/giây giống GPS thật.</p>
+  </div>
+
+  <div id="stopWrap" class="card hide"><button id="bStop" class="alt">⏹ Dừng</button></div>
+
+  <details class="card">
+    <summary>Tinh chỉnh</summary>
+    <label>Ngưỡng tăng tốc: <span id="vOn">0.6</span> m/s²<input id="sOn" type="range" min="0.2" max="2" step="0.1" value="0.6"></label>
+    <label>Thời gian giữ trước khi tắt: <span id="vHold">1.5</span> s<input id="sHold" type="range" min="0.5" max="4" step="0.1" value="1.5"></label>
+    <label>Âm lượng: <span id="vVol">80</span>%<input id="sVol" type="range" min="10" max="100" step="5" value="80"></label>
+  </details>
+</main>
+
+<script>
+const $=id=>document.getElementById(id), clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+const P={on:.6,hold:1.5,vol:.8,cont:false};
+const S={mode:null,vFix:0,tFix:0,a:0,acc:false,low:0,vp:0,rpm:900,gear:0,shiftUntil:0,load:0,last:0,lastPos:null};
+const CIRC=2.0; let GEARS,FINAL,IDLE,UP,DOWN,MAXRPM,LAUNCH,E,prevAcc=false;
+/* Hồ sơ động cơ: fm = số xung nổ/vòng (xi-lanh/2); osc = [dạng sóng, bội tần, mức]; lp = [nền, theo RPM, theo tải] */
+const PROFILES={
+ porsche:{name:'Porsche 911',desc:'Boxer 6 xi-lanh: gắt, kim loại, vòng tua cao tới 8000.',fm:3,gears:[3.6,2.2,1.6,1.25,1,.82],final:4.4,idle:900,up:7000,down:3000,max:8000,launch:1500,
+  osc:[['sawtooth',1,.55],['sawtooth',1.004,.45],['square',2,.16],['triangle',3,.2]],drive:3.5,q:3,lp:[400,.45,2600],noise:.3,turbo:0,lfo:.05},
+ bmw:{name:'BMW M3',desc:'Thẳng 6 xi-lanh: mượt, trầm, dày tiếng.',fm:3,gears:[4.1,2.4,1.67,1.23,1,.82],final:3.9,idle:800,up:6800,down:2500,max:7600,launch:1300,
+  osc:[['sawtooth',1,.5],['triangle',1,.4],['sawtooth',2,.18],['sine',.5,.3]],drive:2.2,q:2,lp:[300,.3,1800],noise:.2,turbo:0,lfo:0},
+ vw:{name:'VW Golf GTI',desc:'4 xi-lanh tăng áp: ồm, có tiếng rít turbo và tiếng xì khi nhả ga.',fm:2,gears:[3.6,2.1,1.4,1,.8,.65],final:4.2,idle:800,up:5800,down:2000,max:6500,launch:1300,
+  osc:[['sawtooth',1,.6],['sawtooth',1.008,.4],['square',.5,.25],['triangle',2,.15]],drive:3,q:2,lp:[250,.3,1400],noise:.25,turbo:.12,lfo:0},
+ amg:{name:'Mercedes-AMG V8',desc:'V8: rền, trầm, rung nhịp "burble" ở vòng tua thấp.',fm:4,gears:[4,2.5,1.7,1.3,1,.8],final:3.7,idle:700,up:6200,down:2300,max:7000,launch:1200,
+  osc:[['sawtooth',1,.5],['square',.5,.45],['sawtooth',1.01,.3],['triangle',.25,.4]],drive:3.5,q:2,lp:[200,.25,1500],noise:.3,turbo:0,lfo:.35},
+ ev:{name:'Xe điện',desc:'Mô tơ điện: tiếng rít êm kiểu tương lai, không sang số.',fm:4,gears:[1],final:9,idle:1500,up:99999,down:0,max:14000,launch:0,
+  osc:[['sine',1,.5],['sine',2,.3],['triangle',4,.12],['sine',3,.15]],drive:1.2,q:1,lp:[2000,.2,3000],noise:.03,turbo:0,lfo:0}
+};
+function curve(k){const c=new Float32Array(1024);for(let i=0;i<1024;i++)c[i]=Math.tanh(k*(i/512-1));return c}
+function applyProfile(){
+  if(!ac)return;
+  o.forEach((x,i)=>{const d=E.osc[i]; if(d){x.os.type=d[0];x.m=d[1];x.g.gain.value=d[2]}else x.g.gain.value=0});
+  sh.curve=curve(E.drive); lp.Q.value=E.q;
+}
+function setProfile(k){
+  E=PROFILES[k]; ({gears:GEARS,final:FINAL,idle:IDLE,up:UP,down:DOWN,max:MAXRPM,launch:LAUNCH}=E);
+  S.gear=Math.min(S.gear,GEARS.length-1); S.rpm=clamp(S.rpm,IDLE,MAXRPM);
+  applyProfile();
+  document.querySelectorAll('#chips .chip').forEach(c=>c.classList.toggle('sel',c.dataset.k===k));
+  $('pdesc').textContent=E.desc;
+}
+let keepAlive,wl=null,ac,master,o,lp,nGain,sh,amp,lfo,lfoG,tw,twG,tmr,watchId,sim={v:0,pedal:false,brake:false,tFix:0,boostUntil:0};
+
+/* ---------- Audio ---------- */
+const chain=(...n)=>{for(let i=0;i<n.length-1;i++)n[i].connect(n[i+1])}; // Safari cũ: connect() không trả về node
+function silentAudio(){ // iOS cũ: phần tử <audio> im lặng đưa phiên âm thanh sang "playback" (phát được cả khi gạt im lặng)
+  try{
+    const sr=8000,n=4000,b=new Uint8Array(44+n),v=new DataView(b.buffer),w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
+    w(0,'RIFF');v.setUint32(4,36+n,true);w(8,'WAVEfmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+    v.setUint32(24,sr,true);v.setUint32(28,sr,true);v.setUint16(32,1,true);v.setUint16(34,8,true);w(36,'data');v.setUint32(40,n,true);b.fill(128,44);
+    let bin='';for(let i=0;i<b.length;i++)bin+=String.fromCharCode(b[i]);
+    keepAlive=new Audio('data:audio/wav;base64,'+btoa(bin)); keepAlive.loop=true; keepAlive.setAttribute('playsinline','');
+    const r=keepAlive.play(); if(r&&r.catch)r.catch(()=>{});
+  }catch(e){}
+}
+function resumeAudio(){
+  try{ if(ac&&ac.state!=='running'){const r=ac.resume(); if(r&&r.catch)r.catch(()=>{})} }catch(e){}
+  try{ if(keepAlive&&keepAlive.paused){const r=keepAlive.play(); if(r&&r.catch)r.catch(()=>{})} }catch(e){}
+}
+async function lockScreen(){ try{ if('wakeLock' in navigator&&!wl){wl=await navigator.wakeLock.request('screen'); wl.addEventListener('release',()=>{wl=null})} }catch(e){} }
+function unlockScreen(){ try{wl&&wl.release()}catch(e){} wl=null }
+function initAudio(){
+  if(ac){resumeAudio();return true}
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC){$('msg').textContent='Trình duyệt này không hỗ trợ Web Audio.';return false}
+  try{ if(navigator.audioSession) navigator.audioSession.type='playback' }catch(e){}
+  silentAudio();
+  try{ac=new AC({latencyHint:'interactive'})}catch(e){ac=new AC()}
+  resumeAudio();
+  master=ac.createGain(); master.gain.value=0;
+  const comp=ac.createDynamicsCompressor();
+  lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.Q.value=2; lp.frequency.value=800;
+  sh=ac.createWaveShaper();
+  const pre=ac.createGain(); pre.gain.value=.5;
+  o=[0,1,2,3].map(()=>{const os=ac.createOscillator(),g=ac.createGain(); g.gain.value=0;
+    chain(os,g,pre); os.start(); return {os,g,m:1}});
+  amp=ac.createGain(); lfo=ac.createOscillator(); lfoG=ac.createGain(); lfoG.gain.value=0; lfo.connect(lfoG); lfoG.connect(amp.gain); lfo.start();
+  tw=ac.createOscillator(); twG=ac.createGain(); twG.gain.value=0; chain(tw,twG,master); tw.start(); // tiếng rít turbo
+  chain(pre,sh,lp,amp,master); sh.oversample='2x';
+  // tiếng hút gió (noise)
+  const buf=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate), d=buf.getChannelData(0);
+  for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;
+  const ns=ac.createBufferSource(); ns.buffer=buf; ns.loop=true;
+  const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=900; bp.Q.value=.8;
+  nGain=ac.createGain(); nGain.gain.value=0; chain(ns,bp,nGain,master); ns.start();
+  chain(master,comp,ac.destination);
+  const ub=ac.createBuffer(1,1,22050),us=ac.createBufferSource(); us.buffer=ub; us.connect(ac.destination); us.start(0); // "mở khoá" Safari ngay trong cử chỉ chạm
+  applyProfile();
+  return true;
+}
+function updateAudio(now){
+  if(!ac)return; const t=ac.currentTime, f=S.rpm/60*E.fm;
+  o.forEach(x=>x.os.frequency.setTargetAtTime(f*x.m,t,.03));
+  lp.frequency.setTargetAtTime(E.lp[0]+S.rpm*E.lp[1]+S.load*E.lp[2],t,.05);
+  const g=S.on?(.35+.65*S.load)*P.vol*(now<S.shiftUntil?.25:1):0;
+  master.gain.setTargetAtTime(g,t,S.on?.08:.4);        // vào nhanh, tắt êm
+  if(prevAcc&&!S.acc&&E.turbo)S.pssh=now+450;           // xì xả (blow-off) khi nhả ga
+  prevAcc=S.acc;
+  nGain.gain.setTargetAtTime(now<S.pssh?.8:(S.on?S.load*E.noise:0),t,.1);
+  tw.frequency.setTargetAtTime(1500+S.rpm*.7,t,.05);
+  twG.gain.setTargetAtTime(S.acc&&E.turbo?S.load*E.turbo:0,t,.15);
+  const d=E.lfo*(1-S.rpm/MAXRPM);                       // rung nhịp V8 giảm dần theo RPM
+  amp.gain.setTargetAtTime(1-d/2,t,.05); lfoG.gain.setTargetAtTime(d/2,t,.05);
+  lfo.frequency.setTargetAtTime(S.rpm/60,t,.05);
+}
+
+/* ---------- GPS pipeline ---------- */
+function onFix(v,t){
+  if(v<.6)v=0;
+  if(S.tFix){const dt=clamp((t-S.tFix)/1000,.3,3); S.a=.45*S.a+.55*((v-S.vFix)/dt)}
+  S.vFix=v; S.tFix=t;
+  if(v===0){S.acc=false;S.low=0;return}
+  if(!S.acc&&S.a>P.on){S.acc=true;S.low=0}
+  if(S.acc){
+    if(S.a>P.on*.5)S.low=0;
+    else if(!S.low)S.low=t;
+    else if(t-S.low>P.hold*1000){S.acc=false;S.low=0}
+  }
+}
+function hav(a,b){const R=6371e3,r=Math.PI/180,dl=(b.latitude-a.latitude)*r,dn=(b.longitude-a.longitude)*r;
+  const h=Math.sin(dl/2)**2+Math.cos(a.latitude*r)*Math.cos(b.latitude*r)*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))}
+function startGps(){
+  if(!navigator.geolocation){$('msg').textContent='Thiết bị không hỗ trợ GPS.';return false}
+  if(window.isSecureContext===false){$('msg').textContent='GPS cần HTTPS. Hãy mở bằng liên kết https://';return false}
+  watchGps(true);
+  return true;
+}
+function watchGps(high){
+  if(watchId!=null)navigator.geolocation.clearWatch(watchId);
+  S.gpsHigh=high;
+  watchId=navigator.geolocation.watchPosition(p=>{
+    const c=p.coords; S.gpsAcc=c.accuracy; S.gpsAt=performance.now(); S.gpsErr=''; S.gpsFails=0;
+    if(!high&&!S.retryHigh){S.retryHigh=true;setTimeout(()=>{if(S.mode==='gps')watchGps(true)},8000)} // đã có vị trí thô → thử lại GPS chính xác
+    if(c.accuracy>60)return;
+    let v=c.speed; const now=performance.now();
+    if(v==null||isNaN(v)){ v=0;
+      if(S.lastPos&&S.lastT){v=hav(S.lastPos,c)/Math.max(.3,(now-S.lastT)/1000)} }
+    S.lastPos={latitude:c.latitude,longitude:c.longitude}; S.lastT=now;
+    onFix(v,now);
+  },e=>{
+    if(e.code===1){S.gpsErr='Chưa cấp quyền vị trí: vào Cài đặt > Quyền riêng tư > Dịch vụ định vị > Safari (Websites) và chọn "Khi dùng ứng dụng", rồi tải lại trang';return}
+    S.gpsFails=(S.gpsFails||0)+1;
+    if(e.code===2)S.gpsErr='Không xác định được vị trí. Kiểm tra Dịch vụ định vị đã bật, thử ra ngoài trời.';
+    else S.gpsErr=S.gpsAt?'Tạm thời chưa có cập nhật GPS mới (tín hiệu yếu hoặc đang đứng yên)...'
+      :'Đang tìm tín hiệu GPS... hãy ra ngoài trời, bật "Vị trí chính xác" cho Safari'+(high?'':' (đang dùng Wi‑Fi/di động, chưa đủ chính xác)');
+    if(!S.gpsAt&&S.gpsFails===2&&high)watchGps(false);   // chẩn đoán: thử định vị thô để biết quyền có hoạt động không
+  },{enableHighAccuracy:high,maximumAge:0,timeout:high?30000:15000});
+}
+
+/* ---------- Engine model + vòng lặp ---------- */
+function tick(){
+  const now=performance.now(), dt=clamp((now-(S.last||now))/1000,.01,.1); S.last=now;
+  if(S.mode==='sim'){
+    const a=sim.brake?-5:(sim.pedal||now<sim.boostUntil)?3.2*(1-sim.v/50):-.12;
+    sim.v=clamp(sim.v+a*dt,0,50);
+    if(now-sim.tFix>=1000){sim.tFix=now;onFix(sim.v+(Math.random()-.5)*.15,now)}
+  }
+  const since=(now-S.tFix)/1000;
+  if(S.mode==='gps'&&since>4){S.acc=false;S.a*=.9}
+  let vp=S.vFix; if(S.acc&&since<3)vp=Math.max(0,S.vFix+S.a*Math.min(since,1.2));
+  S.vp=vp;
+  S.on=P.cont?(S.vFix>0&&!(S.mode==='gps'&&since>4)):S.acc;   // có tiếng? (chế độ liên tục: mọi lúc đang chạy)
+  // hộp số ảo
+  const rpmAt=g=>vp/CIRC*60*GEARS[g]*FINAL;
+  if(rpmAt(S.gear)>UP&&S.gear<GEARS.length-1){S.gear++;S.shiftUntil=now+350}
+  else if(rpmAt(S.gear)<DOWN&&S.gear>0){S.gear--}
+  let tg=rpmAt(S.gear); if(S.gear===0)tg=Math.max(tg,LAUNCH); // trượt côn lúc xuất phát
+  tg=clamp(tg,IDLE,MAXRPM);
+  S.rpm+=(tg-S.rpm)*(1-Math.exp(-dt*(tg>S.rpm?6:3)));
+  S.load+=((S.acc?clamp(S.a/2.5,.15,1):(S.on?.12:0))-S.load)*(1-Math.exp(-dt*4));
+  updateAudio(now); render();
+}
+const _c={};
+function setT(id,v){if(_c[id]!==v){_c[id]=v;$(id).textContent=v}}
+function render(){
+  setT('kmh',Math.round(S.vp*3.6)); setT('acc',S.a.toFixed(1));
+  setT('rpm',S.mode?Math.round(S.rpm/10)*10:0); setT('gear',S.mode?(GEARS.length>1?S.gear+1:'EV'):'-');
+  const w=(S.mode?Math.round(clamp((S.rpm-IDLE)/(MAXRPM-IDLE),0,1)*100):0)+'%';
+  if(_c.w!==w){_c.w=w;$('rpmbar').style.width=w}
+  let st='Chưa bắt đầu',cls='badge';
+  if(S.mode){ if(S.acc){st='Đang tăng tốc · phát âm thanh';cls='badge on'} else if(S.on){st='Chạy ổn định · vẫn phát âm thanh';cls='badge on'} else st=S.vFix>0?'Ổn định / giảm tốc · tắt tiếng':'Đứng yên · tắt tiếng' }
+  setT('state',st); if(_c.cls!==cls){_c.cls=cls;$('badge').className=cls}
+  let info='';
+  if(S.mode==='gps'){
+    info=S.gpsErr||(S.gpsAcc==null?'GPS: đang chờ tín hiệu...':'GPS ±'+Math.round(S.gpsAcc)+' m · '+Math.round((performance.now()-S.gpsAt)/1000)+' s trước'+(S.gpsAcc>60?' (chưa đủ chính xác)':''));
+  } else if(S.mode==='sim') info='Mô phỏng (dữ liệu 1 lần/giây)';
+  if(S.mode&&ac)info+=' · Âm thanh: '+ac.state;
+  setT('gpsInfo',info);
+}
+
+/* ---------- Điều khiển ---------- */
+function begin(mode){
+  if(!initAudio())return;
+  lockScreen();
+  Object.assign(S,{mode,vFix:0,tFix:0,a:0,acc:false,low:0,rpm:IDLE,gear:0,load:0,last:0,lastT:0,lastPos:null,gpsAcc:null,gpsAt:0,gpsErr:'',gpsFails:0,retryHigh:false});
+  sim={v:0,pedal:false,brake:false,tFix:0,boostUntil:0};
+  if(mode==='gps'&&!startGps()){S.mode=null;return}
+  $('start').classList.add('hide'); $('stopWrap').classList.remove('hide');
+  $('simPanel').classList.toggle('hide',mode!=='sim');
+  tmr=setInterval(tick,40);
+}
+function stop(){
+  unlockScreen();
+  clearInterval(tmr); if(watchId!=null){navigator.geolocation.clearWatch(watchId);watchId=null}
+  S.mode=null;S.acc=false; if(ac)master.gain.setTargetAtTime(0,ac.currentTime,.05);
+  $('start').classList.remove('hide');$('stopWrap').classList.add('hide');$('simPanel').classList.add('hide');render();
+}
+$('bGps').onclick=()=>begin('gps'); $('bSim').onclick=()=>begin('sim'); $('bStop').onclick=stop;
+function hold(id,key){const e=$(id);
+  const dn=ev=>{ev.preventDefault();try{e.setPointerCapture(ev.pointerId)}catch(_){}sim[key]=true;e.classList.add('down')}, up=()=>{sim[key]=false;e.classList.remove('down')};
+  e.addEventListener('pointerdown',dn);['pointerup','pointercancel','lostpointercapture'].forEach(n=>e.addEventListener(n,up));
+  e.addEventListener('contextmenu',ev=>ev.preventDefault())}
+$('tap').onclick=()=>{const n=performance.now();sim.boostUntil=Math.min(n+10000,Math.max(n,sim.boostUntil)+3000)};
+hold('pedal','pedal'); hold('brake','brake');
+[['sOn','vOn','on',1],['sHold','vHold','hold',1],['sVol','vVol','vol',100]].forEach(([s,l,k,d])=>{
+  $(s).oninput=e=>{const x=+e.target.value; P[k]=d===100?x/100:x; $(l).textContent=d===100?x:x.toFixed(1)}});
+Object.entries(PROFILES).forEach(([k,p])=>{const b=document.createElement('button');b.className='chip';b.dataset.k=k;b.textContent=p.name;b.onclick=()=>setProfile(k);$('chips').appendChild(b)});
+setProfile('porsche');
+function setMode(c){
+  P.cont=c;
+  $('seg').dataset.on=c?'1':'0';
+  document.querySelectorAll('#seg .opt').forEach(b=>{const on=(b.dataset.m==='1')===c;b.classList.toggle('sel',on);b.setAttribute('aria-pressed',on)});
+  $('modeDesc').textContent=c?'Giữ tiếng động cơ liên tục khi xe đang di chuyển (kể cả chạy đều); chỉ tắt khi xe dừng.':'Chỉ phát tiếng khi xe đang tăng tốc; chạy đều hoặc giảm tốc thì tắt tiếng.\nSử dụng hỗ trợ cho người thường bị say xe điện';
+  try{localStorage.setItem('es_mode',c?'1':'0')}catch(e){}
+}
+document.querySelectorAll('#seg .opt').forEach(b=>b.onclick=()=>setMode(b.dataset.m==='1'));
+let _m=null;try{_m=localStorage.getItem('es_mode')}catch(e){}
+setMode(_m==='1');
+function fitWarn(){ // co cỡ chữ để dòng cảnh báo vừa đúng 1 dòng
+  const w=$('warn'),t=$('warnT'),ic=t.previousElementSibling,cs=getComputedStyle(w);
+  let f=14; w.style.fontSize=f+'px';
+  const room=()=>w.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight)-ic.offsetWidth-6;
+  while(f>6&&t.offsetWidth>room()){f-=.25;w.style.fontSize=f+'px'}
+}
+window.addEventListener('resize',fitWarn); window.addEventListener('orientationchange',fitWarn);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fitWarn);
+fitWarn();
+// Safari tạm dừng AudioContext khi chuyển app/khóa màn hình: tự phục hồi khi quay lại hoặc khi chạm
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&S.mode){resumeAudio();lockScreen()}});
+document.addEventListener('pointerdown',()=>{if(S.mode)resumeAudio()},{passive:true});
+window.addEventListener('pagehide',()=>{if(S.mode)stop()});
+render();
+</script>
+</body>
+</html>
